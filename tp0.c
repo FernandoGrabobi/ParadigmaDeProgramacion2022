@@ -44,30 +44,24 @@ void personasEstresadas(trabajo listaDeTrabajo[]) {
   }
 }
 
-
 void personasEnPeligro(trabajo listaDeTrabajo[]){
   bool es3 = false;
   for (int i = 0; i < 5; i++) {
-    /// me tengo que ir luego termino esto by:ferpa
-    /*if ((personasEstresadas(listaDeTrabajo,5))||(listaDeTrabajo[i].Poder ==
-  "Prensa")) { printf("\n El trabajador Numero %d esta estresado \n", i+1); }
+    if (((listaDeTrabajo[i].tarea.complejidad > 5)&&(listaDeTrabajo[i].Poder != "Pl"))||(listaDeTrabajo[i].Poder == "PRENSA")){ 
+      printf("\n El trabajador Numero %d esta estresado \n", i+1); }
   else { printf("");
-    }*/
+    }
   }
 }
-// bueno pa, cuidate tkm <3
-// me canse jajs, hice lo d trabajadores enemigos, mayorComplejidad, Unica tarea
-// y agrege un par de cosas mas :)
 
 void TrabajadoresEnemigos(trabajo listaDeTrabajo[]) {
   for (int i = 0; i < 5; i++) {
     if (listaDeTrabajo[i].Poder == "PJ") {
-      ////Hace falta imprimir los enemigos??
-      printf("Los enemigos del Poder Judicial son el Poder Ejecutivo");
+      printf("Los enemigos del Poder Judicial son el Poder Ejecutivo - %s ", listaDeTrabajo[i].Poder);
     }else if (listaDeTrabajo[i].Poder == "PL") {
-      printf("Sus enemigos son PJ, y legisladores de otros partidos");
-    }else if ((listaDeTrabajo[i].Poder == "PRENSA")||(listaDeTrabajo[i].Poder == "prensa")) {
-      printf("Sus enemigos son PJ, PE y legisladores de otros partidos");
+      printf("Sus enemigos son PJ, y legisladores de otros partidos - %s ", listaDeTrabajo[i].Poder);
+    }else if (listaDeTrabajo[i].Poder == "PRENSA"){
+      printf("Sus enemigos son PJ, PE y legisladores de otros partidos - %s ",listaDeTrabajo[i].Poder);
     }
   }
 }
@@ -76,19 +70,19 @@ void mayorComplejidad(task listaDeTareas[]) {
   int mayor = 0;
   int indice = 0;
   for (int i = 0; i < 5; i++) {
-    if (listaDeTareas->complejidad > mayor) {
-      mayor = listaDeTareas->complejidad;
+    if (listaDeTareas[i].complejidad > mayor) {
+      mayor = listaDeTareas[i].complejidad;
       indice = i;
     }
   }
-  printf("El trabajador con mayor complejidad es %d \n", mayor, " su DNI es ",listaDeTrabajo[indice].DNI);
+  printf("El trabajador con mayor complejidad es %d \n", mayor, " su DNI es %d ",listaDeTrabajo[indice].DNI);
 }
 
 void UnicaTarea(trabajo listaDeTrabajo[]) {
   int trabajador;
   for (int i = 0; i < 5; i++) {
     if (listaDeTrabajo[i].cantidadDeTareasQueRealiza = 1) {
-      trabajador = i;
+      trabajador += i;
     }
     printf("El trabajador Nro %d realiza una unica tarea",i);
   }
@@ -199,43 +193,38 @@ int main(void) {
         
         switch (opcionDeTarea) {
         case1:
-          printf(" Selecciono la tarea N 1: %s con complejidad %d \n", listaDeTareas[opcionDeTarea - 1].descripcion, listaDeTareas[opcionDeTarea - 1].complejidad);
           listaDeTrabajo[i].tarea.complejidad = listaDeTareas[opcionDeTarea - 1].complejidad;
           strcpy(listaDeTrabajo[i].tarea.descripcion,listaDeTareas[opcionDeTarea - 1].descripcion);
           listaDeTrabajo[opcionDeTarea - 1].cantidadDeTareasQueRealiza += 1;
+          
           break;
         case2:
-          /// printf(" Selecciono la tarea N 2: %s con complejidad %d \n",
-          /// listaDeTareas[opcionDeTarea-1].descripcion,listaDeTareas[opcionDeTarea-1].complejidad);
           listaDeTrabajo[i].tarea.complejidad = listaDeTareas[opcionDeTarea - 1].complejidad;
           strcpy(listaDeTrabajo[i].tarea.descripcion,listaDeTareas[opcionDeTarea - 1].descripcion);
           listaDeTrabajo[opcionDeTarea - 1].cantidadDeTareasQueRealiza += 1;
+          
           break;
         case3:
-          /// printf(" Selecciono la tarea N 3: %s con complejidad %d \n",
-          /// listaDeTareas[opcionDeTarea-1].descripcion,listaDeTareas[opcionDeTarea-1].complejidad);
           listaDeTrabajo[i].tarea.complejidad = listaDeTareas[opcionDeTarea - 1].complejidad;
           strcpy(listaDeTrabajo[i].tarea.descripcion, listaDeTareas[opcionDeTarea - 1].descripcion);
           listaDeTrabajo[opcionDeTarea - 1].cantidadDeTareasQueRealiza += 1;
+          
           break;
         case4:
-          /// printf(" Selecciono la tarea N 4: %s con complejidad %d \n",
-          /// listaDeTareas[opcionDeTarea-1].descripcion,listaDeTareas[opcionDeTarea-1].complejidad);
           listaDeTrabajo[i].tarea.complejidad = listaDeTareas[opcionDeTarea - 1].complejidad;
           strcpy(listaDeTrabajo[i].tarea.descripcion, listaDeTareas[opcionDeTarea - 1].descripcion);
           listaDeTrabajo[opcionDeTarea - 1].cantidadDeTareasQueRealiza += 1;
+          
           break;
         case5:
-          /// printf(" Selecciono la tarea N 5: %s con complejidad %d \n",
-          /// listaDeTareas[opcionDeTarea-1].descripcion,listaDeTareas[opcionDeTarea-1].complejidad);
           listaDeTrabajo[i].tarea.complejidad = listaDeTareas[opcionDeTarea - 1].complejidad;
           strcpy(listaDeTrabajo[i].tarea.descripcion, listaDeTareas[opcionDeTarea - 1].descripcion);
           listaDeTrabajo[opcionDeTarea - 1].cantidadDeTareasQueRealiza += 1;
+          
           break;
         }
       }
 
-      printf("\n \n");
       bandera = true;
       break;
     case 2:
@@ -280,13 +269,12 @@ int main(void) {
         printf("\n Debe ingresar primero la opcion 1 para poder usar esta opcion \n");
       }
       break;
-
     case 6:
       if (bandera == true) {
         system("clear");
         printf("\n --- A seleccionado la opcion 6 ---\n");
-        printf("\n \n");
         mayorComplejidad(listaDeTareas);
+        
       } else {
         printf("\n Debe ingresar primero la opcion 1 para poder usar esta "
                "opcion \n");
@@ -296,8 +284,8 @@ int main(void) {
       if (bandera == true) {
         system("clear");
         printf("\n --- A seleccionado la opcion 7 ---\n");
-        printf("\n \n");
         UnicaTarea(listaDeTrabajo);
+        
       } else {
         printf("\n Debe ingresar primero la opcion 1 para poder usar esta "
                "opcion \n");
