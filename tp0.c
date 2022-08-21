@@ -134,8 +134,9 @@ int main(void) {
 
     /*Control de errores menu*/
 
-    while ((menu > 6) || (menu < 0)) {
+    while ((menu > 7)||(menu < 0)) {
       system("clear");
+      printf("\n--- ERROR ---\n");
       printf("\n---Opcion 1 para ingresar todos los datos ---\n");
       printf("\n---Opcion 2 para conocer las tareas estresantes\n");
       printf("\n---Opcion 3 para conocer las personas estresadas\n");
