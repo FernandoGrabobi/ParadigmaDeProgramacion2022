@@ -10,38 +10,91 @@ struct task {
 } typedef task;
 
 struct trabajo {
-  long DNI;
+  int DNI;
   char Poder[100];
   task tarea;
   char partidoPolitico[100];
+  int cantidadDeTareasQueRealiza;
 } typedef trabajo;
 
 task listaDeTareas[5];
 trabajo listaDeTrabajo[5];
 
 void calcularEstres(task listaDeTareas[]) {
- 
-  for(int i = 0; i < 5; i++){
+
+  for (int i = 0; i < 5; i++) {
     if (listaDeTareas[i].complejidad > 5) {
-      printf("\n La tarea Numero %d es estresante porque tiene una complejidad de %d \n", i+1, listaDeTareas[i].complejidad);
+      printf("\n La tarea Numero %d es estresante porque tiene una complejidad "
+             "de %d \n",
+             i + 1, listaDeTareas[i].complejidad);
     } else {
-      printf("\n La tarea Numero %d se la considera no estresante \n", i+1);
+      printf("\n La tarea Numero %d se la considera no estresante \n", i + 1);
     }
   }
-  
 }
 
-void personasEstresadas(trabajo listaDeTrabajo[],int tamanio){
-  for(int i = 0; i < 5; i++){
-    if ((listaDeTrabajo[i].tarea.complejidad > 5)||(listaDeTrabajo[i].Poder == "PJ")) {
-      printf("\n El trabajador Numero %d esta estresado \n", i+1);
+void personasEstresadas(trabajo listaDeTrabajo[]) {
+  for (int i = 0; i < 5; i++) {
+    if ((listaDeTrabajo[i].tarea.complejidad > 5) ||
+        (listaDeTrabajo[i].Poder == "PJ")) {
+      printf("\n El trabajador Numero %d esta estresado \n", i + 1);
     } else {
       printf("");
     }
   }
 }
 
-void Inicializar(task listaDeTareas[] , int tamanio) {
+
+void personasEnPeligro(trabajo listaDeTrabajo[]){
+  bool es3 = false;
+  for (int i = 0; i < 5; i++) {
+    /// me tengo que ir luego termino esto by:ferpa
+    /*if ((personasEstresadas(listaDeTrabajo,5))||(listaDeTrabajo[i].Poder ==
+  "Prensa")) { printf("\n El trabajador Numero %d esta estresado \n", i+1); }
+  else { printf("");
+    }*/
+  }
+}
+// bueno pa, cuidate tkm <3
+// me canse jajs, hice lo d trabajadores enemigos, mayorComplejidad, Unica tarea
+// y agrege un par de cosas mas :)
+
+void TrabajadoresEnemigos(trabajo listaDeTrabajo[]) {
+  for (int i = 0; i < 5; i++) {
+    if (listaDeTrabajo[i].Poder == "PJ") {
+      ////Hace falta imprimir los enemigos??
+      printf("Los enemigos del Poder Judicial son el Poder Ejecutivo");
+    }else if (listaDeTrabajo[i].Poder == "PL") {
+      printf("Sus enemigos son PJ, y legisladores de otros partidos");
+    }else if ((listaDeTrabajo[i].Poder == "PRENSA")||(listaDeTrabajo[i].Poder == "prensa")) {
+      printf("Sus enemigos son PJ, PE y legisladores de otros partidos");
+    }
+  }
+}
+
+void mayorComplejidad(task listaDeTareas[]) {
+  int mayor = 0;
+  int indice = 0;
+  for (int i = 0; i < 5; i++) {
+    if (listaDeTareas->complejidad > mayor) {
+      mayor = listaDeTareas->complejidad;
+      indice = i;
+    }
+  }
+  printf("El trabajador con mayor complejidad es %d \n", mayor, " su DNI es ",listaDeTrabajo[indice].DNI);
+}
+
+void UnicaTarea(trabajo listaDeTrabajo[]) {
+  int trabajador;
+  for (int i = 0; i < 5; i++) {
+    if (listaDeTrabajo[i].cantidadDeTareasQueRealiza = 1) {
+      trabajador = i;
+    }
+    printf("El trabajador Nro %d realiza una unica tarea",i);
+  }
+}
+
+void Inicializar(task listaDeTareas[], int tamanio) {
   for (int i = 0; i < tamanio; i++) {
     for (int f = 0; f < 100; f++) {
       listaDeTareas[i].descripcion[f] = '\0';
@@ -50,14 +103,14 @@ void Inicializar(task listaDeTareas[] , int tamanio) {
   }
 }
 
-void Inicializar2(trabajo listaDeTrabajo[] , int tamanio) {
+void Inicializar2(trabajo listaDeTrabajo[], int tamanio) {
   for (int i = 0; i < tamanio; i++) {
     for (int f = 0; f < 100; f++) {
       listaDeTrabajo[i].DNI = 0;
       listaDeTrabajo[i].Poder[f] = '\0';
-      listaDeTrabajo[i].tarea.complejidad=0;
-      listaDeTrabajo[i].tarea.descripcion[f]='\0';
-      listaDeTrabajo[i].partidoPolitico[f]='\0';
+      listaDeTrabajo[i].tarea.complejidad = 0;
+      listaDeTrabajo[i].tarea.descripcion[f] = '\0';
+      listaDeTrabajo[i].partidoPolitico[f] = '\0';
     }
   }
 }
@@ -67,7 +120,6 @@ int main(void) {
 
   int menu, opcionDeTarea;
   bool bandera;
-  
 
   menu = 0;
   opcionDeTarea = 0;
@@ -81,20 +133,23 @@ int main(void) {
     printf("\n---Opcion 2 para conocer las tareas estresantes\n");
     printf("\n---Opcion 3 para conocer las personas estresadas\n");
     printf("\n---Opcion 4 para conocer las personas que estan en peligro\n");
-    printf("\n---Opcion 5 para mostrar \n");
+    printf("\n---Opcion 5 para mostrar los enemigos de los trabajadores\n");
+    printf("\n---Opcion 6 para mostrar al trabajador con mayor complejidad\n");
+    printf("\n---Opcion 7 para mostrar aquellos trabajadores con una tarea\n");
     scanf("%d", &menu);
 
     /*Control de errores menu*/
 
-    while ((menu > 4) || (menu < 0)) {
+    while ((menu > 6) || (menu < 0)) {
       system("clear");
-      printf("\n---ERROR---\n");
       printf("\n---Opcion 1 para ingresar todos los datos ---\n");
       printf("\n---Opcion 2 para conocer las tareas estresantes\n");
       printf("\n---Opcion 3 para conocer las personas estresadas\n");
       printf("\n---Opcion 4 para conocer las personas que estan en peligro\n");
-      printf("\n---Opcion 5 para mostrar p\n");
-      scanf("%d", &menu);
+      printf("\n---Opcion 5 para mostrar los enemigos de los trabajadores\n");
+      printf("\n---Opcion 6 para mostrar al trabajador con mayor complejidad\n");
+      printf("\n---Opcion 7 para mostrar aquellos trabajadores con una tarea\n");
+       scanf("%d", &menu);
     }
 
     /*fin Control de errores menu*/
@@ -104,78 +159,82 @@ int main(void) {
       system("clear");
       printf("\n --- A seleccionado la opcion 1 --- \n");
       Inicializar(listaDeTareas, 5);
-      
+
       for (int i = 0; i < 5; i++) {
-        printf("Ingrese la Descripcion de la tarea N %d \n", i+1);
+        printf("Ingrese la Descripcion de la tarea N %d \n", i + 1);
         fflush(stdin);
         scanf("%s", &listaDeTareas[i].descripcion);
-        printf("Ingrese la complejidad de la tarea N %d \n", i+1);
+        printf("Ingrese la complejidad de la tarea N %d \n", i + 1);
         scanf("%d", &listaDeTareas[i].complejidad);
-        while((listaDeTareas[i].complejidad > 10)||(listaDeTareas[i].complejidad < 0)){
+        while ((listaDeTareas[i].complejidad > 10)||(listaDeTareas[i].complejidad < 0)){
           system("clear");
           printf("\n---ERROR ingresar valor entre 0 y 10 ---\n");
-          printf("Ingrese la complejidad de la tarea N %d \n", i+1);
+          printf("Ingrese la complejidad de la tarea N %d \n", i + 1);
           scanf("%d", &listaDeTareas[i].complejidad);
         }
       }
-      
+
       Inicializar2(listaDeTrabajo, 5);
-      
-      for (int i = 0; i < 5; i++){
-        printf("Ingrese el DNI del trabajador N %d \n", i+1);
-        scanf("%ld", &listaDeTrabajo[i].DNI);
-        
-        while ((listaDeTrabajo[i].DNI > 00000001) || (listaDeTrabajo[i].DNI < 99999999)) {
+
+      for (int i = 0; i < 5; i++) {
+        system("clear");
+        printf("Ingrese el DNI del trabajador N %d \n", i + 1);
+        scanf("%d", &listaDeTrabajo[i].DNI);
+
+        while ((listaDeTrabajo[i].DNI < 00000001)||(listaDeTrabajo[i].DNI > 99999999)) {
           system("clear");
           printf("\n---ERROR---\n");
-          printf("Ingrese el DNI del trabajador N %d \n", i+1);
-          scanf("%ld", &listaDeTrabajo[i].DNI);
+          printf("Ingrese el DNI del trabajador N %d \n", i + 1);
+          scanf("%d", &listaDeTrabajo[i].DNI);
         }
-        
-        printf("\n Ingrese el poder en el que trabaja el trabajador N %d \n", i+1);
+
+        printf("\n Ingrese el poder en el que trabaja el trabajador N %d \n", i + 1);
         fflush(stdin);
-        scanf("%s",listaDeTrabajo[i].Poder);
-        printf("\n Ingrese el partido politico que milita el trabajador N %d \n", i+1);
+        scanf("%s", listaDeTrabajo[i].Poder);
+        printf("\n Ingrese el partido politico que milita el trabajador N %d \n",i + 1);
         fflush(stdin);
-        scanf("%s",listaDeTrabajo[i].partidoPolitico);
-        printf("\n Que tarea desarrolla el trabajador N %d elegir entre la tarea 1 a la 5 \n", i+1);
+        scanf("%s", listaDeTrabajo[i].partidoPolitico);
+        printf("\n Que tarea desarrolla el trabajador N %d elegir entre la tarea 1 a la 5 \n", i + 1);
         scanf("%d", &opcionDeTarea);
         
-        switch(opcionDeTarea){
-          case1:
-            printf(" Selecciono la tarea N 1: %s con complejidad %d \n", listaDeTareas[opcionDeTarea-1].descripcion,listaDeTareas[opcionDeTarea-1].complejidad);
-            listaDeTrabajo[i].tarea.complejidad = listaDeTareas[opcionDeTarea-1].complejidad;
-            strcpy(listaDeTrabajo[i].tarea.descripcion,listaDeTareas[opcionDeTarea-1].descripcion); 
-          
+        switch (opcionDeTarea) {
+        case1:
+          printf(" Selecciono la tarea N 1: %s con complejidad %d \n", listaDeTareas[opcionDeTarea - 1].descripcion, listaDeTareas[opcionDeTarea - 1].complejidad);
+          listaDeTrabajo[i].tarea.complejidad = listaDeTareas[opcionDeTarea - 1].complejidad;
+          strcpy(listaDeTrabajo[i].tarea.descripcion,listaDeTareas[opcionDeTarea - 1].descripcion);
+          listaDeTrabajo[opcionDeTarea - 1].cantidadDeTareasQueRealiza += 1;
           break;
-          case2:
-            ///printf(" Selecciono la tarea N 2: %s con complejidad %d \n", listaDeTareas[opcionDeTarea-1].descripcion,listaDeTareas[opcionDeTarea-1].complejidad);
-            listaDeTrabajo[i].tarea.complejidad = listaDeTareas[opcionDeTarea-1].complejidad;
-            strcpy(listaDeTrabajo[i].tarea.descripcion,listaDeTareas[opcionDeTarea-1].descripcion); 
-          
+        case2:
+          /// printf(" Selecciono la tarea N 2: %s con complejidad %d \n",
+          /// listaDeTareas[opcionDeTarea-1].descripcion,listaDeTareas[opcionDeTarea-1].complejidad);
+          listaDeTrabajo[i].tarea.complejidad = listaDeTareas[opcionDeTarea - 1].complejidad;
+          strcpy(listaDeTrabajo[i].tarea.descripcion,listaDeTareas[opcionDeTarea - 1].descripcion);
+          listaDeTrabajo[opcionDeTarea - 1].cantidadDeTareasQueRealiza += 1;
           break;
-          case3:
-            ///printf(" Selecciono la tarea N 3: %s con complejidad %d \n", listaDeTareas[opcionDeTarea-1].descripcion,listaDeTareas[opcionDeTarea-1].complejidad);
-            listaDeTrabajo[i].tarea.complejidad = listaDeTareas[opcionDeTarea-1].complejidad;
-            strcpy(listaDeTrabajo[i].tarea.descripcion,listaDeTareas[opcionDeTarea-1].descripcion); 
-
+        case3:
+          /// printf(" Selecciono la tarea N 3: %s con complejidad %d \n",
+          /// listaDeTareas[opcionDeTarea-1].descripcion,listaDeTareas[opcionDeTarea-1].complejidad);
+          listaDeTrabajo[i].tarea.complejidad = listaDeTareas[opcionDeTarea - 1].complejidad;
+          strcpy(listaDeTrabajo[i].tarea.descripcion, listaDeTareas[opcionDeTarea - 1].descripcion);
+          listaDeTrabajo[opcionDeTarea - 1].cantidadDeTareasQueRealiza += 1;
           break;
-          case4:
-            ///printf(" Selecciono la tarea N 4: %s con complejidad %d \n", listaDeTareas[opcionDeTarea-1].descripcion,listaDeTareas[opcionDeTarea-1].complejidad);
-            listaDeTrabajo[i].tarea.complejidad = listaDeTareas[opcionDeTarea-1].complejidad;
-            strcpy(listaDeTrabajo[i].tarea.descripcion,listaDeTareas[opcionDeTarea-1].descripcion); 
-          
+        case4:
+          /// printf(" Selecciono la tarea N 4: %s con complejidad %d \n",
+          /// listaDeTareas[opcionDeTarea-1].descripcion,listaDeTareas[opcionDeTarea-1].complejidad);
+          listaDeTrabajo[i].tarea.complejidad = listaDeTareas[opcionDeTarea - 1].complejidad;
+          strcpy(listaDeTrabajo[i].tarea.descripcion, listaDeTareas[opcionDeTarea - 1].descripcion);
+          listaDeTrabajo[opcionDeTarea - 1].cantidadDeTareasQueRealiza += 1;
           break;
-          case5:
-            ///printf(" Selecciono la tarea N 5: %s con complejidad %d \n", listaDeTareas[opcionDeTarea-1].descripcion,listaDeTareas[opcionDeTarea-1].complejidad);
-            listaDeTrabajo[i].tarea.complejidad = listaDeTareas[opcionDeTarea-1].complejidad;
-            strcpy(listaDeTrabajo[i].tarea.descripcion,listaDeTareas[opcionDeTarea-1].descripcion); 
-          
+        case5:
+          /// printf(" Selecciono la tarea N 5: %s con complejidad %d \n",
+          /// listaDeTareas[opcionDeTarea-1].descripcion,listaDeTareas[opcionDeTarea-1].complejidad);
+          listaDeTrabajo[i].tarea.complejidad = listaDeTareas[opcionDeTarea - 1].complejidad;
+          strcpy(listaDeTrabajo[i].tarea.descripcion, listaDeTareas[opcionDeTarea - 1].descripcion);
+          listaDeTrabajo[opcionDeTarea - 1].cantidadDeTareasQueRealiza += 1;
           break;
         }
-        
       }
-     
+
       printf("\n \n");
       bandera = true;
       break;
@@ -192,38 +251,56 @@ int main(void) {
       }
       break;
     case 3:
-      system("clear");
-      printf("\n --- A seleccionado la opcion 3 --- \n");
-      personasEstresadas(listaDeTrabajo, 5);
-      
-
-
-
-      
       if (bandera == true) {
+        system("clear");
+        printf("\n --- A seleccionado la opcion 3 --- \n");
+        personasEstresadas(listaDeTrabajo);
 
       } else {
         printf("\n Debe ingresar primero la opcion 1 para poder usar esta opcion \n");
       }
       break;
     case 4:
-      system("clear");
-      printf("\n --- A seleccionado la opcion 4 ---\n");
-      printf("\n \n");
       if (bandera == true) {
+        system("clear");
+        printf("\n --- A seleccionado la opcion 4 ---\n");
+        personasEnPeligro(listaDeTrabajo);
 
+      } else {
+        printf("\n Debe ingresar primero la opcion 1 para poder usar esta "
+               "opcion \n");
+      }
+      break;
+    case 5:
+      if (bandera == true) {
+        system("clear");
+        printf("\n --- A seleccionado la opcion 5 ---\n");
+        TrabajadoresEnemigos(listaDeTrabajo);
       } else {
         printf("\n Debe ingresar primero la opcion 1 para poder usar esta opcion \n");
       }
       break;
-    case 5:
-      system("clear");
-      printf("\n --- A seleccionado la opcion 4 ---\n");
-      printf("\n \n");
-      if (bandera == true) {
 
+    case 6:
+      if (bandera == true) {
+        system("clear");
+        printf("\n --- A seleccionado la opcion 6 ---\n");
+        printf("\n \n");
+        mayorComplejidad(listaDeTareas);
       } else {
-        printf("\n Debe ingresar primero la opcion 1 para poder usar esta opcion \n");
+        printf("\n Debe ingresar primero la opcion 1 para poder usar esta "
+               "opcion \n");
+      }
+      break;
+    case 7:
+      if (bandera == true) {
+        system("clear");
+        printf("\n --- A seleccionado la opcion 7 ---\n");
+        printf("\n \n");
+        UnicaTarea(listaDeTrabajo);
+      } else {
+        printf("\n Debe ingresar primero la opcion 1 para poder usar esta "
+               "opcion \n");
       }
       break;
     default:
