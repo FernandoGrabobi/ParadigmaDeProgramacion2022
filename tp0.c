@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 struct task {
   char descripcion[100];
   int complejidad;
@@ -58,7 +59,7 @@ void personasEnPeligro(trabajo listaDeTrabajo[]) {
     int resultado = strcmp(listaDeTrabajo[i].Poder, Prensa);
     int resultado2 = strcmp(listaDeTrabajo[i].Poder, PoderLegislativo);
     
-    if (((listaDeTrabajo[i].tarea.complejidad > 5) && (resultado2 == 0))||(resultado == 0)) {
+    if (/*(*/(listaDeTrabajo[i].tarea.complejidad > 5) && (resultado2 == 0)/*)||(resultado == 0)*/) {
       printf("\n El trabajador Numero %d esta peligro \n", i + 1);
     } else {
       printf("\n El trabajador Numero %d NO esta en peligro \n", i + 1);
